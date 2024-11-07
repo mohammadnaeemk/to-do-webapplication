@@ -2,7 +2,7 @@ import { useState } from "react";
 import ToDolist from "./ToDolist";
 
 export default function ToDoMainbox() {
-  const [jobs,setjobs] = useState ([
+  const [jobs, setjobs] = useState([
     {
       discription: "naeem discription",
       status: "active",
@@ -23,8 +23,26 @@ export default function ToDoMainbox() {
       status: "active",
       done: false,
     },
-  ])
-
+  ]);
+  const addToDoHandler = (event)=> {
+    if (event.key === "Enter") {
+      if (
+        event.target.value !== null &&
+        event.target.value !== "" &&
+        event.target.value !== undefined
+      ) {
+        setjobs([
+          ...jobs,
+          {
+            discription: event.target.value,
+            status: "inactive",
+            done: false,
+          },
+        ]);
+      }
+    }
+  }
+  
   return (
     <div className="bg-gray-100">
       <div className="flex items-center justify-center h-screen">
@@ -36,7 +54,8 @@ export default function ToDoMainbox() {
             </h1>
           </div>
           <div className="relative">
-            <input
+            <input onKeyDown={addToDoHandler}
+              id="txt-input"
               type="text"
               placeholder="What needs to be done today?"
               className="w-full px-2 py-3 border rounded outline-none border-grey-600"
