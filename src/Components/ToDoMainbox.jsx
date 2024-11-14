@@ -1,30 +1,35 @@
 import { useState } from "react";
 import ToDolist from "./ToDolist";
+import { v4 as uuidv4 } from "uuid";
 
 export default function ToDoMainbox() {
   const [jobs, setjobs] = useState([
     {
+      id: uuidv4(),
       discription: "naeem discription",
       status: "active",
       done: false,
     },
     {
+      id: uuidv4(),
       discription: "Reaza discription",
       status: "active",
       done: true,
     },
     {
+      id: uuidv4(),
       discription: "ali discription",
       status: "inactive",
       done: true,
     },
     {
+      id: uuidv4(),
       discription: "Mohammad reza discription",
       status: "active",
       done: false,
     },
   ]);
-  const addToDoHandler = (event)=> {
+  const addToDoHandler = (event) => {
     if (event.key === "Enter") {
       if (
         event.target.value !== null &&
@@ -37,12 +42,21 @@ export default function ToDoMainbox() {
             discription: event.target.value,
             status: "inactive",
             done: false,
+            id: uuidv4(),
           },
         ]);
       }
     }
-  }
-  
+  };
+  const deleteToDo = (delItem) => {
+    if (jobs.includes(delItem)) {
+      let newListJobs = jobs.filter((item) => {
+        return item.id !== delItem.id;
+      });
+      setjobs(newListJobs);
+    }
+  };
+
   return (
     <div className="bg-gray-100">
       <div className="flex items-center justify-center h-screen">
@@ -54,7 +68,8 @@ export default function ToDoMainbox() {
             </h1>
           </div>
           <div className="relative">
-            <input onKeyDown={addToDoHandler}
+            <input
+              onKeyDown={addToDoHandler}
               id="txt-input"
               type="text"
               placeholder="What needs to be done today?"
@@ -62,7 +77,7 @@ export default function ToDoMainbox() {
             />
           </div>
 
-          <ToDolist key={1} listOfjobs={jobs} />
+          <ToDolist key={1} listOfjobs={jobs} deleteToDo={deleteToDo} />
         </div>
       </div>
     </div>

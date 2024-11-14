@@ -1,7 +1,14 @@
 import ColseIcon from "./images/CloseIcon";
 import EditIcon from "./images/EditIcon";
 
-export default function ToDoitem({ keyId, discription, status, done }) {
+export default function ToDoitem({
+  keyId,
+  item,
+  discription,
+  status,
+  done,
+  deleteToDo,
+}) {
   const isChecked = done === true; // Simplify checked determination
 
   return (
@@ -32,7 +39,7 @@ export default function ToDoitem({ keyId, discription, status, done }) {
       >
         <EditIcon />
 
-        <ColseIcon />
+        <ColseIcon onClick={() => deleteToDo(item)}/>
       </button>
     </li>
   );

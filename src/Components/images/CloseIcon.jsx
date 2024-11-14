@@ -1,6 +1,10 @@
-export default function ColseIcon() {
+export default function ColseIcon({onClick}) {
+
+  
   return (
+    
     <svg
+      onClick={onClick}
       xmlns="http://www.w3.org/2000/svg"
       className="w-5 h-5 text-red-700"
       fill="none"
