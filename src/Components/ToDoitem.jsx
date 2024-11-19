@@ -8,8 +8,9 @@ export default function ToDoitem({
   status,
   done,
   deleteToDo,
+  checkBoxHandler
 }) {
-  const isChecked = done === true; // Simplify checked determination
+  const isChecked = status === "inactive"; // Simplify checked determination
 
   return (
     <li
@@ -20,7 +21,7 @@ export default function ToDoitem({
         <input
           type="checkbox"
           checked={isChecked}
-          onChange={() => {}}
+          onChange={checkBoxHandler}
           className=""
         />
 

@@ -56,6 +56,30 @@ export default function ToDoMainbox() {
       setjobs(newListJobs);
     }
   };
+  const checkBoxHandler = (chekItem) => {
+
+    if (jobs.includes(chekItem)) {
+      let newListJobs = jobs.map((item) => {
+
+        if (item.id == chekItem.id) {
+          return {
+            id: chekItem.id,
+
+            discription: chekItem.discription,
+
+            status: chekItem.status === "active" ? "inactive" : "active",
+
+            done: chekItem.done,
+          };
+        } else {
+          return item;
+        }
+      });
+      console.log(newListJobs);
+      
+      setjobs(newListJobs);
+    }
+  };
 
   return (
     <div className="bg-gray-100">
@@ -77,7 +101,12 @@ export default function ToDoMainbox() {
             />
           </div>
 
-          <ToDolist key={1} listOfjobs={jobs} deleteToDo={deleteToDo} />
+          <ToDolist
+            key={1}
+            listOfjobs={jobs}
+            deleteToDo={deleteToDo}
+            checkBoxHandler={checkBoxHandler}
+          />
         </div>
       </div>
     </div>
